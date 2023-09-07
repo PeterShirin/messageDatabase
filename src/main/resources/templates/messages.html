@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>MessageService</title>
+  <style>
+    h1,
+    h2,
+    h3 {
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    form label {
+        font-weight: bold;
+    }
+
+    form input[type="text"] {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    form button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+<h1>Message Service</h1>
+<h2>Username: <span th:text="${sender}"></span></h2>
+
+<h3>Messages:</h3>
+<table>
+  <tr>
+    <th>Message</th>
+    <th>Username</th>
+  </tr>
+  <tr th:each="message : ${messages}">
+    <td th:text="${message.message}"></td>
+    <td th:text="${message.username}"></td>
+  </tr>
+</table>
+
+<h3>Add New Message:</h3>
+<form action="/messages/add" method="post">
+
+  <label for="message">Message:</label>
+  <input type="text" id="message" name="message" required>
+
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+
+  <button type="submit">Send</button>
+</form>
+
+<form id="filter-form" action="/messages/filter">
+
+  <label for="filter">Filter by Username:</label>
+  <input type="text" id="filter" name="username">
+
+  <button type="submit">Search</button>
+</form>
+
+<script>
+    document.getElementById('filter-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var username = document.getElementById('filter-form').elements.namedItem('filter').value;
+        window.location.href = '/messages/filter?filter=' + encodeURIComponent(username);
+    });
+</script>
+</body>
+</html>

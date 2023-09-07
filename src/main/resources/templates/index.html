@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <style>
+        h1 {
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>You're welcome!</h1>
+<form action="/messages" method="post">
+    <label for="sender">Please enter your name:</label>
+    <input type="text" id="sender" name="sender" required>
+    <button type="submit">Log in</button>
+</form>
+</body>
+</html>
